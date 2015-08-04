@@ -1,0 +1,9 @@
+{
+    "require": {
+        "slim/slim": "~2.6"
+    },
+    "require-dev": {
+        "kigkonsult/icalcreator": "*"
+    },
+    "minimum-stability": "dev"
+}

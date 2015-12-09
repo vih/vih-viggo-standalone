@@ -51,7 +51,7 @@ $app->get('/calendar/:name', function ($name) use ($app) {
 
     $month = date('m');
     $year = date('Y');
-    $months= 5;
+    $months= 6;
     $pages = 1;
     $format = 'landscape';
 
@@ -79,7 +79,7 @@ $app->get('/calendar/:name', function ($name) use ($app) {
     try {
         $app->response->headers->set('Cache-Control', 'must-revalidate, post-check=0, pre-check=0');
         $app->response->headers->set('Content-Type', 'application/pdf');
-        $app->response->headers->set('Content-Disposition', 'attachment; filename="vih-kalender.pdf"');
+        $app->response->headers->set('Content-Disposition', 'attachment; filename="kalender.pdf"');
         print $response->getBody();
     } catch (HttpException $ex) {
         echo $ex;

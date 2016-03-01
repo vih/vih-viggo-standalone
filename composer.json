@@ -1,9 +1,22 @@
 {
+    "name": "vih/viggo-calendar-extractor",
+    "type": "project",
+    "description": "Using kalendersiden.dk this library creates a PDF version of calendar items extracted from Viggo",
+    "keywords": [ "viggo", "calendar", "kalendersiden" ],
+    "homepage": "http://vih.dk/kalender",
+    "support": {
+       "issues": "https://github.com/vih/vih-viggo-standalone/issues"
+    },
+    "authors": [
+        {
+            "name": "Lars Olesen",
+            "email": "lars@intraface.dk"
+        }
+    ],
     "require": {
         "php": "5.5.*",
         "slim/slim": "~2.6",
         "guzzlehttp/guzzle": "~6.0@dev",
         "kigkonsult/icalcreator": "@dev"
-    },
-    "minimum-stability": "dev"
+    }
 }

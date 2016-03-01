@@ -1,6 +1,6 @@
 {
     "require": {
-        "php": "^5.4.0",
+        "php": "5.5.15",
         "slim/slim": "~2.6",
         "guzzlehttp/guzzle": "~6.0@dev"
     },

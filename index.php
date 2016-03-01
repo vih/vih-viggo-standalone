@@ -49,8 +49,8 @@ $app->get('/calendar/:name', function ($name) use ($app) {
     }
     $event_data = implode("\n", $vevents);
 
-    $month = date('m');
-    $year = date('Y');
+    $month = 1;
+    $year = 2016;
     $months= 6;
     $pages = 1;
     $format = 'landscape';

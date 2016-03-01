@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3f15b079635ddaa0cf34c109a270b47d",
+    "hash": "4355d4453de5fe86b80c7378b13e9f56",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "6692db3cda013e8357330243c33fe1838d0ea6f5"
+                "reference": "739b9c8378c462943c42fee5353453ab4164ed8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/6692db3cda013e8357330243c33fe1838d0ea6f5",
-                "reference": "6692db3cda013e8357330243c33fe1838d0ea6f5",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/739b9c8378c462943c42fee5353453ab4164ed8e",
+                "reference": "739b9c8378c462943c42fee5353453ab4164ed8e",
                 "shasum": ""
             },
             "require": {
@@ -33,7 +33,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.0-dev"
+                    "dev-master": "6.2-dev"
                 }
             },
             "autoload": {
@@ -66,7 +66,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2015-07-30 04:48:33"
+            "time": "2016-02-17 21:09:10"
         },
         {
             "name": "guzzlehttp/promises",
@@ -74,12 +74,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "f596be052ef429a16b2f640812fcf84392dd38f7"
+                "reference": "976e0f50981f845dcee1c25bfcac2304a7bb5583"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/f596be052ef429a16b2f640812fcf84392dd38f7",
-                "reference": "f596be052ef429a16b2f640812fcf84392dd38f7",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/976e0f50981f845dcee1c25bfcac2304a7bb5583",
+                "reference": "976e0f50981f845dcee1c25bfcac2304a7bb5583",
                 "shasum": ""
             },
             "require": {
@@ -117,20 +117,20 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2015-06-30 16:39:54"
+            "time": "2016-02-26 22:29:15"
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.1.0",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "af0e1758de355eb113917ad79c3c0e3604bce4bd"
+                "reference": "2e89629ff057ebb49492ba08e6995d3a6a80021b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/af0e1758de355eb113917ad79c3c0e3604bce4bd",
-                "reference": "af0e1758de355eb113917ad79c3c0e3604bce4bd",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/2e89629ff057ebb49492ba08e6995d3a6a80021b",
+                "reference": "2e89629ff057ebb49492ba08e6995d3a6a80021b",
                 "shasum": ""
             },
             "require": {
@@ -154,7 +154,7 @@
                     "GuzzleHttp\\Psr7\\": "src/"
                 },
                 "files": [
-                    "src/functions.php"
+                    "src/functions_include.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -175,7 +175,7 @@
                 "stream",
                 "uri"
             ],
-            "time": "2015-06-24 19:55:15"
+            "time": "2016-02-18 21:54:00"
         },
         {
             "name": "psr/http-message",
@@ -232,12 +232,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "faf83069298593bdfd8482a14bda171937473fc1"
+                "reference": "26017599cb009b4df082dbbd091a29f466a84b93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/faf83069298593bdfd8482a14bda171937473fc1",
-                "reference": "faf83069298593bdfd8482a14bda171937473fc1",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/26017599cb009b4df082dbbd091a29f466a84b93",
+                "reference": "26017599cb009b4df082dbbd091a29f466a84b93",
                 "shasum": ""
             },
             "require": {
@@ -270,7 +270,7 @@
                 "rest",
                 "router"
             ],
-            "time": "2015-08-03 07:11:55"
+            "time": "2015-10-09 07:51:59"
         }
     ],
     "packages-dev": [
@@ -327,6 +327,8 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": "^5.4.0"
+    },
     "platform-dev": []
 }

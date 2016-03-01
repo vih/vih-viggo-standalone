@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3e3bd77de21970abf888534024c4d774",
+    "hash": "e8256759bfdd2f1c5cfc7fbcd232ea92",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -178,6 +178,51 @@
             "time": "2016-02-18 21:54:00"
         },
         {
+            "name": "kigkonsult/icalcreator",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/iCalcreator/iCalcreator.git",
+                "reference": "b87a4a6d34045fefd5999214c8b455520ee5ce07"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iCalcreator/iCalcreator/zipball/b87a4a6d34045fefd5999214c8b455520ee5ce07",
+                "reference": "b87a4a6d34045fefd5999214c8b455520ee5ce07",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "iCalcreator.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Kjell-Inge Gustafsson",
+                    "email": "ical@kigkonsult.se"
+                }
+            ],
+            "description": "iCalcreator is a PHP implementation of rfc2445/rfc5545, management of iCal formatted files",
+            "homepage": "http://kigkonsult.se",
+            "keywords": [
+                "calendar",
+                "file",
+                "format",
+                "managerment",
+                "rfc2445",
+                "rfc5545"
+            ],
+            "time": "2015-07-28 18:59:39"
+        },
+        {
             "name": "psr/http-message",
             "version": "dev-master",
             "source": {
@@ -273,57 +318,12 @@
             "time": "2015-10-09 07:51:59"
         }
     ],
-    "packages-dev": [
-        {
-            "name": "kigkonsult/icalcreator",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/iCalcreator/iCalcreator.git",
-                "reference": "b87a4a6d34045fefd5999214c8b455520ee5ce07"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/iCalcreator/iCalcreator/zipball/b87a4a6d34045fefd5999214c8b455520ee5ce07",
-                "reference": "b87a4a6d34045fefd5999214c8b455520ee5ce07",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "iCalcreator.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-2.1"
-            ],
-            "authors": [
-                {
-                    "name": "Kjell-Inge Gustafsson",
-                    "email": "ical@kigkonsult.se"
-                }
-            ],
-            "description": "iCalcreator is a PHP implementation of rfc2445/rfc5545, management of iCal formatted files",
-            "homepage": "http://kigkonsult.se",
-            "keywords": [
-                "calendar",
-                "file",
-                "format",
-                "managerment",
-                "rfc2445",
-                "rfc5545"
-            ],
-            "time": "2015-07-28 18:59:39"
-        }
-    ],
+    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "guzzlehttp/guzzle": 20
+        "guzzlehttp/guzzle": 20,
+        "kigkonsult/icalcreator": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

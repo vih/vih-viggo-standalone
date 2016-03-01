@@ -2,10 +2,8 @@
     "require": {
         "php": "5.5.*",
         "slim/slim": "~2.6",
-        "guzzlehttp/guzzle": "~6.0@dev"
-    },
-    "require-dev": {
-        "kigkonsult/icalcreator": "*"
+        "guzzlehttp/guzzle": "~6.0@dev",
+        "kigkonsult/icalcreator": "@dev"
     },
     "minimum-stability": "dev"
 }

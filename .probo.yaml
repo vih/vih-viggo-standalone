@@ -1,3 +1,7 @@
 steps:
+  - name: Current directory
+    command: 'pwd'
   - name: Install site
     command: 'cd $SRC_DIR; composer install'
+  - name: Set docroot
+    plugin: LAMPapp

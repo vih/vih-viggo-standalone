@@ -5,3 +5,4 @@ steps:
     command: 'cd $SRC_DIR; composer install'
   - name: Set docroot
     plugin: LAMPapp
+    subDirectory: /

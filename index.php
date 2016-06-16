@@ -49,12 +49,11 @@ $app->get('/calendar/:name', function ($name) use ($app) {
     }
     $event_data = implode("\n", $vevents);
 
-    $month = 1;
+    $start_month = 8;
     $year = 2016;
-    $months= 6;
+    $months= 5;
     $pages = 1;
     $format = 'landscape';
-
 
     $url = 'https://kalendersiden.dk/generate.php';
 
@@ -65,7 +64,7 @@ $app->get('/calendar/:name', function ($name) use ($app) {
 
     $response = $client->post($url, [
         'form_params' => [
-            'month' => $month,
+            'month' => $start_month,
             'year' => $year,
             'months' => $months,
             'pages' => $pages,

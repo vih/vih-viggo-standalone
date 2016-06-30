@@ -6,6 +6,7 @@
 
 require 'vendor/autoload.php';
 use GuzzleHttp\Client;
+use Kalendersiden\ViggoAdapter;
 date_default_timezone_set('Europe/Copenhagen');
 
 $options = array('debug' => true);
@@ -23,31 +24,10 @@ $app->get('/calendar/:name', function ($name) use ($app) {
     } else {
         $app->notFound();
     }
-    $previous_summary = '';
+
     $vcalendar = new vcalendar($config);
-    $vcalendar->parse();
-    $events = $vcalendar->selectComponents(date('Y'), date('m'), date('d'), date('Y') + 1, date('m'), date('d'), 'vevent');
-    foreach ($events as $year => $year_arr) {
-        foreach ($year_arr as $month => $month_arr) {
-            foreach ($month_arr as $day => $day_arr) {
-                foreach($day_arr as $event) {
-                    $startDate = $event->getProperty("dtstart");
-                    $endDate = $event->getProperty("dtend");
-                    $summary = $event->getProperty("summary");
-                    if ($previous_summary === $summary) {
-                        continue;
-                    }
-                    if ($startDate['day'] . $startDate['month'] . $startDate['year'] != $endDate['day'] . $endDate['month'] . $endDate['year']) {
-                        $vevents[] = 'fra ' . $startDate['day'] . '.' . $startDate['month'] . '.' . $startDate['year'] . ' til ' . $endDate['day']  . '.' . $endDate['month'] . '.' . $endDate['year'] . ': ' . $summary;
-                    } else {
-                        $vevents[] = $startDate['day'] . '.' . $startDate['month'] . '.' . $startDate['year'] . ': ' . $summary;
-                    }
-                    $previous_summary = $summary;
-                }
-            }
-        }
-    }
-    $event_data = implode("\n", $vevents);
+    $adapter = new ViggoAdapter($vcalendar);
+    $event_data = $adapter->parse();
 
     $start_month = 8;
     $year = 2016;

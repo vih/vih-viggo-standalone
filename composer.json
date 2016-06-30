@@ -18,5 +18,8 @@
         "slim/slim": "~2.6",
         "guzzlehttp/guzzle": "~6.0@dev",
         "kigkonsult/icalcreator": "@dev"
+    },
+    "autoload": {
+        "psr-4": {"Kalendersiden\\": "src/"}
     }
 }

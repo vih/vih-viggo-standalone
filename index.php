@@ -15,11 +15,11 @@ $app = new \Slim\Slim($options);
 $app->get('/calendar/:name', function ($name) use ($app) {
     if ($name === 'vies') {
         $config = array("unique_id" => "vies.dk",
-                        "URL"       => "http://genesis-sheriff.codio.io:3000/calendar/proxy/vies.ics" );
+                        "URL"       => "https://vih-calendar.herokuapp.com/calendar/proxy/vies.ics" );
         $headline = 'Vejle Idrætsefterskole';
     } else if ($name === 'vih') {
         $config = array("unique_id" => "vih.dk",
-                        "URL"       => "http://genesis-sheriff.codio.io:3000/calendar/proxy/vih.ics" );
+                        "URL"       => "https://vih-calendar.herokuapp.com/calendar/proxy/vih.ics" );
         $headline = 'Vejle Idrætshøjskole';
     } else {
         $app->notFound();

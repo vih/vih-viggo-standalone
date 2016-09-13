@@ -5,14 +5,18 @@
  */
 
 require 'vendor/autoload.php';
+
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
 use GuzzleHttp\Client;
 use Kalendersiden\ViggoAdapter;
 date_default_timezone_set('Europe/Copenhagen');
 
 $options = array('debug' => true);
 
-$app = new \Slim\Slim($options);
-$app->get('/calendar/:name', function ($name) use ($app) {
+$app = new \Slim\App($options);
+$app->get('/calendar/{name}', function (Request $request, Response $response) {
+    $name = $request->getAttribute('name');
     if ($name === 'vies') {
         $config = array("unique_id" => "vies.dk",
                         "URL"       => "https://vih-calendar.herokuapp.com/calendar/proxy/vies.ics" );
@@ -22,7 +26,7 @@ $app->get('/calendar/:name', function ($name) use ($app) {
                         "URL"       => "https://vih-calendar.herokuapp.com/calendar/proxy/vih.ics" );
         $headline = 'Vejle Idrætshøjskole';
     } else {
-        $app->notFound();
+        return $response->withStatus(404);
     }
 
     $vcalendar = new vcalendar($config);
@@ -42,7 +46,7 @@ $app->get('/calendar/:name', function ($name) use ($app) {
         'timeout'  => 2.0,
     ]);
 
-    $response = $client->post($url, [
+    $guzzle_response = $client->post($url, [
         'form_params' => [
             'month' => $start_month,
             'year' => $year,
@@ -56,23 +60,26 @@ $app->get('/calendar/:name', function ($name) use ($app) {
     ]);
 
     try {
-        $app->response->headers->set('Cache-Control', 'must-revalidate, post-check=0, pre-check=0');
-        $app->response->headers->set('Content-Type', 'application/pdf');
-        $app->response->headers->set('Content-Disposition', 'attachment; filename="kalender.pdf"');
-        print $response->getBody();
+        $response->withHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0');
+        $response->withHeader('Content-Type', 'application/pdf');
+        $response->withHeader('Content-Disposition', 'attachment; filename="kalender.pdf"');
+        $response->getBody()->write($guzzle_response->getBody());
+        return $response;
     } catch (HttpException $ex) {
         echo $ex;
     }
 });
-$app->get('/calendar/proxy/:name', function ($name) use ($app) {
-    $app->response->headers->set('Content-Type', 'text/calendar');
-    $app->response->headers->set('Content-Disposition', 'attachment');
+$app->get('/calendar/proxy/{name}', function (Request $request, Response $response) {
+    $name = $request->getAttribute('name');
+    $response->withHeader('Content-Type', 'text/calendar');
+    $response->withHeader('Content-Disposition', 'attachment');
     if ($name === 'vies.ics') {
-        echo file_get_contents('https://vejle.viggo.dk/ExportCalendar/?ViggoId=87&UserId=1528&code=4d4e5cc9cc0a6e52360344f0508a22de8f420194');
+        $response->getBody()->write(file_get_contents('https://vejle.viggo.dk/ExportCalendar/?ViggoId=87&UserId=1528&code=4d4e5cc9cc0a6e52360344f0508a22de8f420194'));
     } else if ($name === 'vih.ics') {
-        echo file_get_contents('https://vejle.viggo.dk/ExportCalendar/?ViggoId=87&UserId=298&code=17bca452d0b19b39a49d3ffdc1a77faabe5ae617');
+        $response->getBody()->write(file_get_contents('https://vejle.viggo.dk/ExportCalendar/?ViggoId=87&UserId=298&code=17bca452d0b19b39a49d3ffdc1a77faabe5ae617'));
     } else {
-        $app->notFound();
+        return $response->withStatus(404);
     }
+    return $response;
 });
 $app->run();

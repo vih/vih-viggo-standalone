@@ -33,9 +33,9 @@ $app->get('/calendar/{name}', function (Request $request, Response $response) {
     $adapter = new ViggoAdapter($vcalendar);
     $event_data = $adapter->parse();
 
-    $start_month = 8;
+    $start_month = 10;
     $year = 2016;
-    $months= 5;
+    $months= 6;
     $pages = 1;
     $format = 'landscape';
 

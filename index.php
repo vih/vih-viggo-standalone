@@ -60,15 +60,66 @@ $app->get('/calendar/{name}', function (Request $request, Response $response) {
     ]);
 
     try {
-        $response->withHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0');
-        $response->withHeader('Content-Type', 'application/pdf');
-        $response->withHeader('Content-Disposition', 'attachment; filename="kalender.pdf"');
-        $response->getBody()->write($guzzle_response->getBody());
+        $response = $response->withHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0');
+        $response = $response->withHeader('Content-Type', 'application/pdf');
+        $response = $response->withHeader('Content-Disposition', 'attachment; filename="kalender.pdf"');
+        $response = $response->getBody()->write($guzzle_response->getBody());
         return $response;
     } catch (HttpException $ex) {
         echo $ex;
     }
 });
+
+$app->get('/calendar/csv/{name}', function (Request $request, Response $response) {
+    $name = $request->getAttribute('name');
+    if ($name === 'vies') {
+        $config = array("unique_id" => "vies.dk",
+                        "URL"       => "https://vih-calendar.herokuapp.com/calendar/proxy/vies.ics" );
+        $headline = 'Vejle Idrætsefterskole';
+    } else if ($name === 'vih') {
+        $config = array("unique_id" => "vih.dk",
+                        "URL"       => "https://vih-calendar.herokuapp.com/calendar/proxy/vih.ics" );
+        $headline = 'Vejle Idrætshøjskole';
+    } else {
+        return $response->withStatus(404);
+    }
+
+    $vcalendar = new vcalendar($config);
+    $vcalendar->parse();
+    $events = $vcalendar->selectComponents(date('Y'), date('m'), date('d'), date('Y') + 1, date('m'), date('d'), 'vevent');
+    foreach ($events as $year => $year_arr) {
+        foreach ($year_arr as $month => $month_arr) {
+            foreach ($month_arr as $day => $day_arr) {
+                foreach($day_arr as $event) {
+                    $startDate = $event->getProperty("dtstart");
+                    $endDate = $event->getProperty("dtend");
+                    $summary = $event->getProperty("summary");
+
+                    if ($startDate['day'] . $startDate['month'] . $startDate['year'] != $endDate['day'] . $endDate['month'] . $endDate['year']) {
+                        $event_text =  $endDate['year']  . '/' . $endDate['month'] . '/' .  $endDate['day'] . ', ' . $summary;
+                        $vevents[md5($event_text )] = $event_text;
+                    } else {
+                        $event_text = $startDate['year']  . '/' . $startDate['month'] . '/' . $startDate['day'] . ', ' . $summary;
+                        $vevents[md5($event_text )] = $event_text;
+                    }
+                }
+            }
+        }
+    }
+    $output = implode("\n", $vevents);
+
+    try {
+        $response = $response->withHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0');
+        $response = $response->withHeader('Content-Type', 'application/excel');
+        $response = $response->withHeader('Content-Disposition', 'attachment; filename="sample.csv"');
+
+        $response = $response->getBody()->write($output);
+        return $response;
+    } catch (HttpException $ex) {
+        echo $ex;
+    }
+});
+
 $app->get('/calendar/proxy/{name}', function (Request $request, Response $response) {
     $name = $request->getAttribute('name');
     $response->withHeader('Content-Type', 'text/calendar');

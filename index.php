@@ -33,8 +33,8 @@ $app->get('/calendar/{name}', function (Request $request, Response $response) {
     $adapter = new ViggoAdapter($vcalendar);
     $event_data = $adapter->parse();
 
-    $start_month = 10;
-    $year = 2016;
+    $start_month = 1;
+    $year = 2017;
     $months= 6;
     $pages = 1;
     $format = 'landscape';
@@ -63,7 +63,7 @@ $app->get('/calendar/{name}', function (Request $request, Response $response) {
         $response = $response->withHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0');
         $response = $response->withHeader('Content-Type', 'application/pdf');
         $response = $response->withHeader('Content-Disposition', 'attachment; filename="kalender.pdf"');
-        $response = $response->getBody()->write($guzzle_response->getBody());
+        $response = $response->write($guzzle_response->getBody());
         return $response;
     } catch (HttpException $ex) {
         echo $ex;
@@ -113,7 +113,7 @@ $app->get('/calendar/csv/{name}', function (Request $request, Response $response
         $response = $response->withHeader('Content-Type', 'application/excel');
         $response = $response->withHeader('Content-Disposition', 'attachment; filename="sample.csv"');
 
-        $response = $response->getBody()->write($output);
+        $response->getBody()->write($output);
         return $response;
     } catch (HttpException $ex) {
         echo $ex;

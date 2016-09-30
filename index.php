@@ -90,17 +90,17 @@ $app->get('/calendar/csv/{name}', function (Request $request, Response $response
     foreach ($events as $year => $year_arr) {
         foreach ($year_arr as $month => $month_arr) {
             foreach ($month_arr as $day => $day_arr) {
-                foreach($day_arr as $event) {
+                foreach ($day_arr as $event) {
                     $startDate = $event->getProperty("dtstart");
                     $endDate = $event->getProperty("dtend");
                     $summary = $event->getProperty("summary");
 
-                    if ($startDate['day'] . $startDate['month'] . $startDate['year'] != $endDate['day'] . $endDate['month'] . $endDate['year']) {
-                        $event_text =  $endDate['year']  . '/' . $endDate['month'] . '/' .  $endDate['day'] . ', ' . $summary;
-                        $vevents[md5($event_text )] = $event_text;
-                    } else {
-                        $event_text = $startDate['year']  . '/' . $startDate['month'] . '/' . $startDate['day'] . ', ' . $summary;
-                        $vevents[md5($event_text )] = $event_text;
+                    $begin = new DateTime($startDate['year']  . '-' . $startDate['month'] . '-' . $startDate['day']);
+                    $end   = new DateTime($endDate['year']  . '-' . $endDate['month'] . '-' . $endDate['day']);
+
+                    for ($i = $begin; $begin <= $end; $i->modify('+1 day')) {
+                        $event_text = $i->format("Y/m/d") . ', ' . $summary;
+                        $vevents[$i->format("Ymd")] = $event_text;
                     }
                 }
             }
@@ -111,7 +111,7 @@ $app->get('/calendar/csv/{name}', function (Request $request, Response $response
     try {
         $response = $response->withHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0');
         $response = $response->withHeader('Content-Type', 'application/excel');
-        $response = $response->withHeader('Content-Disposition', 'attachment; filename="sample.csv"');
+        $response = $response->withHeader('Content-Disposition', 'attachment; filename="kalender.csv"');
 
         $response->getBody()->write($output);
         return $response;

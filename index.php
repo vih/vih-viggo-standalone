@@ -33,7 +33,7 @@ $app->get('/calendar/{name}', function (Request $request, Response $response) {
     $adapter = new ViggoAdapter($vcalendar);
     $event_data = $adapter->parse();
 
-    $start_month = 10;
+    $start_month = 8;
     $year = 2016;
     $months= 6;
     $pages = 1;
@@ -100,8 +100,16 @@ $app->get('/calendar/csv/{name}', function (Request $request, Response $response
 
                     for ($i = $begin; $begin <= $end; $i->modify('+1 day')) {
                         $event_text = $i->format("Y/m/d") . ', ' . $summary;
-                        $vevents[$i->format("Ymd")] = $event_text;
+                        if (isset($vevents[$i->format("Ymd")])) {
+                            if ($last_summary != $summary) {
+                                $vevents[$i->format("Ymd")] .= ' - ' . $summary;
+                            }
+                        } else {
+                            $vevents[$i->format("Ymd")] = $event_text;
+                        }
                     }
+                    $last_date = $i;
+                    $last_summary = $summary;
                 }
             }
         }

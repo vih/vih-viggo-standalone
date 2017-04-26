@@ -10,6 +10,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use GuzzleHttp\Client;
 use Kalendersiden\ViggoAdapter;
+
 date_default_timezone_set('Europe/Copenhagen');
 
 // Prepare the Pimple dependency injection container.
@@ -21,8 +22,17 @@ $container['twig'] = function($container) {
     return new Twig_Environment($loader, array('cache'));
 };
 
+// Create the Slim application using our container.
 $app = new \Slim\App($container);
-$app->get('/calendar/{name}', function (Request $request, Response $response) {
+
+$app->get('/', function(Slim\Http\Request $request, Slim\Http\Response $response) {
+    // Load the template through the Twig service in the DIC.
+    $template = $this->get('twig')->loadTemplate('index.html');
+    // Render the template using a simple content variable.
+    return $response->write($template->render(['content' => 'Hello, world!']));
+})->setName('hello-world');
+
+$app->get('/calendar/{name}', function (Slim\Http\Request $request, Response $response) {
     $name = $request->getAttribute('name');
     if ($name === 'vies') {
         $config = array("unique_id" => "vies.dk",
@@ -40,10 +50,10 @@ $app->get('/calendar/{name}', function (Request $request, Response $response) {
     $adapter = new ViggoAdapter($vcalendar);
     $event_data = $adapter->parse();
 
-    $start_month = 8;
-    $year = 2017;
-    $months= 5;
-    $pages = 1;
+    $start_month = $request->getQueryParam('start_month');
+    $year = $request->getQueryParam('year');
+    $months= $request->getQueryParam('months');
+    $pages = $request->getQueryParam('pages');
     $format = 'landscape';
 
     $url = 'https://kalendersiden.dk/generate.php';

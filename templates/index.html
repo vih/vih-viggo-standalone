@@ -1,0 +1,28 @@
+<h1>Print calendar</h1>
+<form action="/calendar/vih" method="GET">
+    <label>Start month <select name="start_month">
+        {% for j in range(1, 12) %}
+        <option value="{{ j }}">{{ j }}</option>
+        {% endfor %}
+    </select></label>
+
+    <label>Year <select name="year">
+        {% for j in range(2017, 2019) %}
+        <option value="{{ j }}">{{ j }}</option>
+        {% endfor %}
+    </select></label>
+
+    <label>Show months <select name="months">
+        {% for j in range(1, 12) %}
+        <option value="{{ j }}">{{ j }}</option>
+        {% endfor %}
+    </select></label>
+
+    <label>Pages <select name="pages">
+        {% for j in range(1, 5) %}
+        <option value="{{ j }}">{{ j }}</option>
+        {% endfor %}
+    </select></label>
+
+    <input type="submit" value="Print">
+</form>

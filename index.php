@@ -33,7 +33,7 @@ $app->get('/calendar/{name}', function (Request $request, Response $response) {
     $adapter = new ViggoAdapter($vcalendar);
     $event_data = $adapter->parse();
 
-    $start_month = 1;
+    $start_month = 8;
     $year = 2017;
     $months= 6;
     $pages = 1;

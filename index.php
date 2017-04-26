@@ -12,9 +12,16 @@ use GuzzleHttp\Client;
 use Kalendersiden\ViggoAdapter;
 date_default_timezone_set('Europe/Copenhagen');
 
-$options = array('debug' => true);
+// Prepare the Pimple dependency injection container.
+$container = new \Slim\Container();
 
-$app = new \Slim\App($options);
+// Add a Twig service to the container.
+$container['twig'] = function($container) {
+    $loader = new Twig_Loader_Filesystem('templates');
+    return new Twig_Environment($loader, array('cache'));
+};
+
+$app = new \Slim\App($container);
 $app->get('/calendar/{name}', function (Request $request, Response $response) {
     $name = $request->getAttribute('name');
     if ($name === 'vies') {

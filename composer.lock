@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9d1b88ae9aae3ab88f30b283adc2916e",
-    "content-hash": "1c96954a2141e385cac4efa283030cc9",
+    "hash": "513fcca3925cdb0089aeb31db448da70",
+    "content-hash": "ca1696e31d186f7f10995875adb27e9d",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -218,37 +218,30 @@
         },
         {
             "name": "kigkonsult/icalcreator",
-            "version": "v2.23.12",
+            "version": "v2.22.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/iCalcreator/iCalcreator.git",
-                "reference": "896f7d8314e6fa0000b61a10586da89da1093bda"
+                "reference": "0ad71f3e8a3f95c0ae7731f7a07ba9424d323560"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/iCalcreator/iCalcreator/zipball/896f7d8314e6fa0000b61a10586da89da1093bda",
-                "reference": "896f7d8314e6fa0000b61a10586da89da1093bda",
+                "url": "https://api.github.com/repos/iCalcreator/iCalcreator/zipball/0ad71f3e8a3f95c0ae7731f7a07ba9424d323560",
+                "reference": "0ad71f3e8a3f95c0ae7731f7a07ba9424d323560",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4"
+                "php": ">=5.3"
             },
             "type": "library",
             "autoload": {
                 "files": [
                     "iCalcreator.php"
-                ],
-                "psr-4": {
-                    "kigkonsult\\iCalcreator\\": [
-                        "src/",
-                        "src/util",
-                        "src/traits"
-                    ]
-                }
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "(proprietary and CC-BY-NC-ND-4.0)"
+                "LGPL-2.1"
             ],
             "authors": [
                 {
@@ -260,22 +253,13 @@
             "homepage": "http://kigkonsult.se",
             "keywords": [
                 "calendar",
-                "daylight",
                 "file",
+                "format",
                 "management",
                 "rfc2445",
-                "rfc5545",
-                "rfc6321",
-                "standard",
-                "vCalendar",
-                "valarm",
-                "vevent",
-                "vfreebusy",
-                "vjournal",
-                "vtimezone",
-                "vtodo"
+                "rfc5545"
             ],
-            "time": "2017-04-23 00:00:00"
+            "time": "2015-05-03 00:00:00"
         },
         {
             "name": "nikic/fast-route",

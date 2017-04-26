@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3913349af13af3d6640c1454bc419525",
-    "content-hash": "26eca8412ecace527b713ac512a08cbc",
+    "hash": "9d1b88ae9aae3ab88f30b283adc2916e",
+    "content-hash": "1c96954a2141e385cac4efa283030cc9",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -40,16 +40,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "dev-master",
+            "version": "6.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "b517bd912afa5aa1033ce434d7138641fd6c31ab"
+                "reference": "8d6c6cc55186db87b7dc5009827429ba4e9dc006"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/b517bd912afa5aa1033ce434d7138641fd6c31ab",
-                "reference": "b517bd912afa5aa1033ce434d7138641fd6c31ab",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/8d6c6cc55186db87b7dc5009827429ba4e9dc006",
+                "reference": "8d6c6cc55186db87b7dc5009827429ba4e9dc006",
                 "shasum": ""
             },
             "require": {
@@ -61,9 +61,6 @@
                 "ext-curl": "*",
                 "phpunit/phpunit": "^4.0",
                 "psr/log": "^1.0"
-            },
-            "suggest": {
-                "psr/log": "Required for using the Log middleware"
             },
             "type": "library",
             "extra": {
@@ -101,7 +98,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2017-04-07 20:03:48"
+            "time": "2017-02-28 22:50:30"
         },
         {
             "name": "guzzlehttp/promises",
@@ -221,30 +218,37 @@
         },
         {
             "name": "kigkonsult/icalcreator",
-            "version": "dev-master",
+            "version": "v2.23.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/iCalcreator/iCalcreator.git",
-                "reference": "17090c9d0cde4d3a63af89e9a33fc230be4533f6"
+                "reference": "896f7d8314e6fa0000b61a10586da89da1093bda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/iCalcreator/iCalcreator/zipball/17090c9d0cde4d3a63af89e9a33fc230be4533f6",
-                "reference": "17090c9d0cde4d3a63af89e9a33fc230be4533f6",
+                "url": "https://api.github.com/repos/iCalcreator/iCalcreator/zipball/896f7d8314e6fa0000b61a10586da89da1093bda",
+                "reference": "896f7d8314e6fa0000b61a10586da89da1093bda",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3"
+                "php": ">=5.4"
             },
             "type": "library",
             "autoload": {
                 "files": [
                     "iCalcreator.php"
-                ]
+                ],
+                "psr-4": {
+                    "kigkonsult\\iCalcreator\\": [
+                        "src/",
+                        "src/util",
+                        "src/traits"
+                    ]
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPL-2.1"
+                "(proprietary and CC-BY-NC-ND-4.0)"
             ],
             "authors": [
                 {
@@ -256,13 +260,22 @@
             "homepage": "http://kigkonsult.se",
             "keywords": [
                 "calendar",
+                "daylight",
                 "file",
-                "format",
                 "management",
                 "rfc2445",
-                "rfc5545"
+                "rfc5545",
+                "rfc6321",
+                "standard",
+                "vCalendar",
+                "valarm",
+                "vevent",
+                "vfreebusy",
+                "vjournal",
+                "vtimezone",
+                "vtodo"
             ],
-            "time": "2017-04-23 16:53:44"
+            "time": "2017-04-23 00:00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -527,10 +540,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "guzzlehttp/guzzle": 20,
-        "kigkonsult/icalcreator": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -16,8 +16,8 @@
     "require": {
         "php": "5.6.*",
         "slim/slim": "~3.5",
-        "guzzlehttp/guzzle": "~6.0@dev",
-        "kigkonsult/icalcreator": "@dev"
+        "guzzlehttp/guzzle": "~6.0",
+        "kigkonsult/icalcreator": "~2.3"
     },
     "autoload": {
         "psr-4": {"Kalendersiden\\": "src/"}

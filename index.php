@@ -35,7 +35,7 @@ $app->get('/calendar/{name}', function (Request $request, Response $response) {
 
     $start_month = 8;
     $year = 2017;
-    $months= 6;
+    $months= 5;
     $pages = 1;
     $format = 'landscape';
 

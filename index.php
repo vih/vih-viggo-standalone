@@ -14,10 +14,14 @@ use Kalendersiden\ViggoAdapter;
 date_default_timezone_set('Europe/Copenhagen');
 
 // Prepare the Pimple dependency injection container.
-$container = new \Slim\Container([
-    'headline' => 'Vejle Idrætshøjskole',
-    'calendar' => 'https://vejle.viggo.dk/ExportCalendar/?ViggoId=87&UserId=298&code=17bca452d0b19b39a49d3ffdc1a77faabe5ae617'
-]);
+$container = new \Slim\Container();
+
+$container['settings'] = function($container) {
+    return [
+        'organization' => 'Vejle Idrætshøjskole',
+        'calendar' => 'https://vejle.viggo.dk/ExportCalendar/?ViggoId=87&UserId=298&code=17bca452d0b19b39a49d3ffdc1a77faabe5ae617'
+    ];
+};
 
 // Add a Twig service to the container.
 $container['twig'] = function($container) {
@@ -29,13 +33,14 @@ $container['twig'] = function($container) {
 $app = new \Slim\App($container);
 
 $app->get('/', function(Slim\Http\Request $request, Slim\Http\Response $response) {
+    return $this->get('settings')['organization'];
     // Load the template through the Twig service in the DIC.
     $template = $this->get('twig')->loadTemplate('index.html');
     // Render the template using a simple content variable.
-    return $response->write($template->render(['content' => 'Hello, world!']));
-})->setName('hello-world');
+    return $response->write($template->render(['organization' => $this->get('settings')['organization']]));
+})  ->setName('frontpage');
 
-$app->get('/calendar/{name}', function (Slim\Http\Request $request, Response $response) {
+$app->get('/calendar/{name}', function (Slim\Http\Request $request, Slim\Http\Response $response) {
     $name = $request->getAttribute('name');
     if ($name === 'vies') {
         $config = array("unique_id" => "vies.dk",

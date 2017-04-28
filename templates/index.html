@@ -3,12 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title></title>
+    <title>Get PDF Calendar</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
             integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
             crossorigin="anonymous"></script>
@@ -18,38 +19,63 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
             integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
             crossorigin="anonymous"></script>
-
 </head>
 <body>
 
-<h1>Print calendar</h1>
+<div class="container">
+
+<div class="lead jumbotron" style="text-align: center;">
+    <h1><span class="fa fa-calendar" aria-hidden="true"></span> Get PDF calendar</h1>
+    <p>Get the official calendar for {{ organization }} as a PDF provided by <a href="http://kalendersiden.dk">kalendersiden.dk</a>.</p>
+</div>
+
 <form action="/calendar/vih" method="GET">
-    <label>Start month <select name="start_month">
-        {% for j in range(1, 12) %}
-        <option value="{{ j }}">{{ j }}</option>
-        {% endfor %}
-    </select></label>
+    <div class="form-group">
+        <label for="start_month">Start month</label>
+        <select id="start_month" name="start_month" class="form-control" aria-describedby="month-help">
+            {% for j in range(1, 12) %}
+            <option value="{{ j }}">{{ j }}</option>
+            {% endfor %}
+        </select>
+        <small id="month-help" class="form-text text-muted">Choose the starting month</small>
+    </div>
 
-    <label>Year <select name="year">
-        {% for j in range(2017, 2019) %}
-        <option value="{{ j }}">{{ j }}</option>
-        {% endfor %}
-    </select></label>
+    <div class="form-group">
+        <label for="year">Start year</label>
+        <select id="year" name="year" class="form-control" aria-describedby="year-help">
+            {% for j in range(2017, 2019) %}
+            <option value="{{ j }}">{{ j }}</option>
+            {% endfor %}
+        </select>
+        <small id="year-help" class="form-text text-muted">Choose the starting year</small>
+    </div>
 
-    <label>Show months <select name="months">
-        {% for j in range(1, 12) %}
-        <option value="{{ j }}">{{ j }}</option>
-        {% endfor %}
-    </select></label>
+    <div class="form-group">
+        <label for="months">Show number of months</label>
+        <select id="months" name="months" class="form-control" aria-describedby="show-months-help">
+            {% for j in range(1, 12) %}
+            <option value="{{ j }}">{{ j }}</option>
+            {% endfor %}
+        </select>
+        <small id="show-months-help" class="form-text text-muted">Choose how many months you want to show</small>
+    </div>
 
-    <label>Pages <select name="pages">
-        {% for j in range(1, 5) %}
-        <option value="{{ j }}">{{ j }}</option>
-        {% endfor %}
-    </select></label>
+    <div class="form-group">
+        <label for="pages">Number of pages</label>
+        <select id="pages" name="pages" class="form-control" aria-describedby="pages-help">
+            {% for j in range(1, 5) %}
+            <option value="{{ j }}">{{ j }}</option>
+            {% endfor %}
+        </select>
+        <small id="pages-help" class="form-text text-muted">Choose how many pages the calendar should be printed on</small>
+    </div>
 
-    <input type="submit" value="Print">
+    <button class="btn btn-default" type="submit">
+        <span class="fa fa-calendar" aria-hidden="true"></span> Get PDF
+    </button>
 </form>
+
+</div>
 
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 

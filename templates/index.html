@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
             integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
             crossorigin="anonymous"></script>
@@ -23,12 +24,10 @@
 
 <div class="container">
 
-<h1>Get PDF calendar</h1>
-
-    <div class="lead">
-        <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></p>
-        <p>Get the official calendar for {{ organization }} as a PDF provided by <a href="http://kalendersiden.dk">kalendersiden.dk</a>.</p>
-    </div>
+<div class="lead jumbotron" style="text-align: center;">
+    <h1><span class="fa fa-calendar" aria-hidden="true"></span> Get PDF calendar</h1>
+    <p>Get the official calendar for {{ organization }} as a PDF provided by <a href="http://kalendersiden.dk">kalendersiden.dk</a>.</p>
+</div>
 
 <form action="/calendar/vih" method="GET">
     <div class="form-group">
@@ -72,7 +71,7 @@
     </div>
 
     <button class="btn btn-default" type="submit">
-        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Get PDF
+        <span class="fa fa-calendar" aria-hidden="true"></span> Get PDF
     </button>
 </form>
 

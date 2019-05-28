@@ -3,7 +3,6 @@
 /**
  * Stand alone app based on SlimPHP getting calendar from Viggo.
  */
-
 require 'vendor/autoload.php';
 
 use \Psr\Http\Message\ServerRequestInterface as Request;

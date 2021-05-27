@@ -5,3 +5,8 @@ Standalone app for showing a prettier calendar based on information extracted fr
 ## How to use?
 
 We have made a special user in Viggo, and we use that user's events to extract the information.
+
+## Development
+
+  heroku login --interactive
+  git push heroku master

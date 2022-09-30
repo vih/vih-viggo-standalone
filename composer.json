@@ -18,7 +18,7 @@
         "slim/slim": "~3.5",
         "guzzlehttp/guzzle": "~6.0",
         "kigkonsult/icalcreator": "2.22.5",
-        "twig/twig": "~1.33"
+        "twig/twig": "~2.15"
     },
     "autoload": {
         "psr-4": {"Kalendersiden\\": "src/"}

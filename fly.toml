@@ -13,12 +13,15 @@ processes = []
 APP_URL = "https://vih-kalendersiden.fly.dev"
 PORT = 8080
 
+[build]
+  builder = "paketobuildpacks/builder:full"
+  buildpacks = ["gcr.io/paketo-buildpacks/php"]
+
 [experimental]
   allowed_public_ports = []
   auto_rollback = true
 
 [[services]]
-  http_checks = []
   internal_port = 8080
   processes = ["app"]
   protocol = "tcp"

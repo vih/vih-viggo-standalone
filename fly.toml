@@ -5,8 +5,13 @@ kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
 
+[build]
+  builder = "paketobuildpacks/builder:full"
+  buildpacks = ["gcr.io/paketo-buildpacks/php"]
+
 [env]
 APP_URL = "https://vih-kalendersiden.fly.dev"
+PORT = 8080
 
 [experimental]
   allowed_public_ports = []
@@ -26,7 +31,7 @@ APP_URL = "https://vih-kalendersiden.fly.dev"
   [[services.ports]]
     force_https = true
     handlers = ["http"]
-    port = 80
+    port = 8080
 
   [[services.ports]]
     handlers = ["tls", "http"]
@@ -37,11 +42,3 @@ APP_URL = "https://vih-kalendersiden.fly.dev"
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
-
-[build]
-  builder = "paketobuildpacks/builder:base"
-  buildpacks = ["gcr.io/paketo-buildpacks/nodejs"]
-  image = "flyio/hellofly:latest"
-  [build.args]
-    PHP_VERSION = "7.4"
-    NODE_VERSION = "14"

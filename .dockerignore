@@ -1,0 +1,30 @@
+# flyctl launch added from .gitignore
+**/.codio
+**/vendor
+**/.idea
+
+# flyctl launch added from vendor/nikic/fast-route/.gitignore
+vendor/nikic/fast-route/vendor
+vendor/nikic/fast-route/**/.idea
+
+# ignore lock file since we have no extra dependencies
+vendor/nikic/fast-route/**/composer.lock
+
+# flyctl launch added from vendor/pimple/pimple/.gitignore
+vendor/pimple/pimple/**/phpunit.xml
+vendor/pimple/pimple/**/.phpunit.result.cache
+vendor/pimple/pimple/**/composer.lock
+vendor/pimple/pimple/vendor
+
+# flyctl launch added from vendor/psr/container/.gitignore
+vendor/psr/container/**/composer.lock
+vendor/psr/container/**/composer.phar
+vendor/psr/container/vendor
+
+# flyctl launch added from vendor/twig/twig/.gitignore
+vendor/twig/twig/build
+vendor/twig/twig/composer.lock
+vendor/twig/twig/ext/twig/autom4te.cache
+vendor/twig/twig/phpunit.xml
+vendor/twig/twig/vendor
+vendor/twig/twig/**/.phpunit.result.cache

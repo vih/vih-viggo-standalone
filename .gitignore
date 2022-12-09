@@ -1,3 +1,4 @@
 .codio
 vendor/
 .idea
+composer.phar

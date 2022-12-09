@@ -6,7 +6,12 @@ Standalone app for showing a prettier calendar based on information extracted fr
 
 We have made a special user in Viggo, and we use that user's events to extract the information.
 
-## Development
+## Deployment
 
-  heroku login --interactive
-  git push heroku master
+### Install Fly.io
+
+  curl -L https://fly.io/install.sh | sh
+
+### Deploy
+
+  fly deploy

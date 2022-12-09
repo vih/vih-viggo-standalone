@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c7a0d69e28fd4ac7cf9dbe04534ee2bd",
+    "content-hash": "a0e5e0a7a8806374a39f38bcd547136f",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -317,30 +317,50 @@
         },
         {
             "name": "kigkonsult/icalcreator",
-            "version": "v2.22.5",
+            "version": "v2.41.71",
             "source": {
                 "type": "git",
                 "url": "https://github.com/iCalcreator/iCalcreator.git",
-                "reference": "0ad71f3e8a3f95c0ae7731f7a07ba9424d323560"
+                "reference": "591b63a76875d5d164c5e2986cc42afbb0524b47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/iCalcreator/iCalcreator/zipball/0ad71f3e8a3f95c0ae7731f7a07ba9424d323560",
-                "reference": "0ad71f3e8a3f95c0ae7731f7a07ba9424d323560",
+                "url": "https://api.github.com/repos/iCalcreator/iCalcreator/zipball/591b63a76875d5d164c5e2986cc42afbb0524b47",
+                "reference": "591b63a76875d5d164c5e2986cc42afbb0524b47",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3"
+                "ext-intl": "*",
+                "ext-mbstring": "*",
+                "ext-openssl": "*",
+                "ext-simplexml": "*",
+                "ext-zlib": "*",
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "degraciamathieu/php-arguments-detector": ">=0.5.0",
+                "ext-xdebug": "*",
+                "phpcompatibility/php-compatibility": ">=9.3.5",
+                "phpstan/phpstan": ">=0.9.3",
+                "phpunit/phpunit": ">=6.5.13",
+                "squizlabs/php_codesniffer": ">=3.5.5"
             },
             "type": "library",
             "autoload": {
                 "files": [
-                    "iCalcreator.php"
-                ]
+                    "autoload.php"
+                ],
+                "psr-4": {
+                    "Kigkonsult\\Icalcreator\\": [
+                        "src/",
+                        "src/Util/",
+                        "src/Traits/"
+                    ]
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPL-2.1"
+                "LGPL-3.0-or-later"
             ],
             "authors": [
                 {
@@ -348,21 +368,52 @@
                     "email": "ical@kigkonsult.se"
                 }
             ],
-            "description": "iCalcreator is a PHP implementation of rfc2445/rfc5545, management of iCal formatted files",
-            "homepage": "http://kigkonsult.se",
+            "description": "iCalcreator is the PHP implementation of rfc2445/rfc5545 and rfc updates, management of calendar information",
             "keywords": [
+                "alarm",
+                "availability",
                 "calendar",
-                "file",
-                "format",
+                "daylight",
+                "event",
+                "ical",
+                "json",
+                "location",
                 "management",
+                "participant",
+                "resource",
                 "rfc2445",
-                "rfc5545"
+                "rfc5545",
+                "rfc5870",
+                "rfc6321",
+                "rfc6868",
+                "rfc7529",
+                "rfc7808",
+                "rfc7953",
+                "rfc7986",
+                "rfc9073",
+                "rfc9074",
+                "standard",
+                "todo",
+                "vCalendar",
+                "valarm",
+                "vevent",
+                "vfreebusy",
+                "vjournal",
+                "vtimezone",
+                "vtodo",
+                "xml"
             ],
             "support": {
-                "issues": "http://kigkonsult.se/contact/index.php",
-                "source": "https://github.com/iCalcreator/iCalcreator/tree/v2.22.5"
+                "issues": "https://github.com/iCalcreator/iCalcreator/issues",
+                "source": "https://github.com/iCalcreator/iCalcreator/tree/v2.41.71"
             },
-            "time": "2015-05-03T00:00:00+00:00"
+            "funding": [
+                {
+                    "url": "https://paypal.me/kigkonsult",
+                    "type": "other"
+                }
+            ],
+            "time": "2022-12-04T10:48:48+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -935,6 +986,89 @@
             ],
             "support": {
                 "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.27.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-11-03T14:55:06+00:00"
+        },
+        {
+            "name": "symfony/polyfill-mbstring",
+            "version": "v1.27.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-mbstring.git",
+                "reference": "8ad114f6b39e2c98a8b0e3bd907732c207c2b534"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/8ad114f6b39e2c98a8b0e3bd907732c207c2b534",
+                "reference": "8ad114f6b39e2c98a8b0e3bd907732c207c2b534",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "provide": {
+                "ext-mbstring": "*"
+            },
+            "suggest": {
+                "ext-mbstring": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.27-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for the Mbstring extension",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "mbstring",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.27.0"
             },
             "funding": [
                 {

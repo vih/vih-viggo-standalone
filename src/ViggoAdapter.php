@@ -6,7 +6,7 @@ class ViggoAdapter
 {
     public $vcalendar;
 
-    public function __construct(Vcalendar $vcalendar)
+    public function __construct(\Kigkonsult\Icalcreator\Vcalendar $vcalendar)
     {
         $this->vcalendar = $vcalendar;
     }
@@ -18,15 +18,15 @@ class ViggoAdapter
             foreach ($year_arr as $month => $month_arr) {
                 foreach ($month_arr as $day => $day_arr) {
                     foreach($day_arr as $event) {
-                        $startDate = $event->getProperty("dtstart");
-                        $endDate = $event->getProperty("dtend");
-                        $summary = $event->getProperty("summary");
+                        $startDate = $event->getDtstart();
+                        $endDate = $event->getDtend();
+                        $summary = $event->getSummary();
 
-                        if ($startDate['day'] . $startDate['month'] . $startDate['year'] != $endDate['day'] . $endDate['month'] . $endDate['year']) {
-                            $event_text = 'fra ' . $startDate['day'] . '.' . $startDate['month'] . '.' . $startDate['year'] . ' til ' . $endDate['day']  . '.' . $endDate['month'] . '.' . $endDate['year'] . ': ' . $summary;
+                        if ($startDate->format('d-m-Y') != $endDate->format('d-m-Y')) {
+                            $event_text = 'fra ' . $startDate->format('d.m.Y') . ' til ' . $endDate->format('d.m.Y') . ': ' . $summary;
                             $vevents[$this->hash($event_text)] = $event_text;
                         } else {
-                            $event_text = $startDate['day'] . '.' . $startDate['month'] . '.' . $startDate['year'] . ': ' . $summary;
+                            $event_text = $startDate->format('d.m.Y') . ': ' . $summary;
                             $vevents[$this->hash($event_text)] = $event_text;
                         }
                     }

@@ -19,8 +19,8 @@ $container = new \Slim\Container();
 $container['config'] = [
     'organization' => 'Vejle Idrætshøjskole',
     'calendar' => 'https://vejle.viggo.dk/ExportCalendar/?ViggoId=87&UserId=298&code=17bca452d0b19b39a49d3ffdc1a77faabe5ae617',
-    #'host' => 'http://localhost:8080'
-    'host' => 'https://vih-kalendersiden.fly.dev'
+    'host' => 'http://localhost:8080'
+    #'host' => 'https://vih-kalendersiden.fly.dev'
 ];
 
 // Add a Twig service to the container.
@@ -45,20 +45,21 @@ $app->get('/calendar/{name}', function (Slim\Http\Request $request, Slim\Http\Re
         $config   = [
             Vcalendar::UNIQUE_ID => "vies.dk",
         ];
-        $url = $this->get('config')['host'] . "/calendar/proxy/vies.ics";
+        $url = $this->get('config')['host'] . "/calendar/proxy/vies";
         $headline = 'Vejle Idrætsefterskole';
     } else if ($name === 'vih') {
         $config   = [
             Vcalendar::UNIQUE_ID => "vih.dk",
         ];
-        $url = $this->get('config')['host'] . "/calendar/proxy/vih.ics";
+        $url = "https://vejle.viggo.dk/ExportCalendar/?ViggoId=87&UserId=298&code=17bca452d0b19b39a49d3ffdc1a77faabe5ae617";
         $headline = 'Vejle Idrætshøjskole';
     } else {
         return $response->withStatus(404);
     }
 
-    $vcalendar = new Vcalendar($config);
     $content = file_get_contents($url);
+    $vcalendar = new Vcalendar($config);
+
     $vcalendar->parse($content);
     $adapter = new ViggoAdapter($vcalendar);
     $event_data = $adapter->parse();
@@ -106,13 +107,13 @@ $app->get('/calendar/csv/{name}', function (Request $request, Response $response
         $config   = [
             Vcalendar::UNIQUE_ID => "vies.dk",
         ];
-        $url = $this->get('config')['host'] . "/calendar/proxy/vies.ics";
+        $url = $this->get('config')['host'] . "/calendar/proxy/vies";
         $headline = 'Vejle Idrætsefterskole';
     } else if ($name === 'vih') {
         $config   = [
             Vcalendar::UNIQUE_ID => "vih.dk",
         ];
-        $url = $this->get('config')['host'] . "/calendar/proxy/vih.ics";
+        $url = "https://vejle.viggo.dk/ExportCalendar/?ViggoId=87&UserId=298&code=17bca452d0b19b39a49d3ffdc1a77faabe5ae617";
         $headline = 'Vejle Idrætshøjskole';
     } else {
         return $response->withStatus(404);
@@ -127,12 +128,9 @@ $app->get('/calendar/csv/{name}', function (Request $request, Response $response
         foreach ($year_arr as $month => $month_arr) {
             foreach ($month_arr as $day => $day_arr) {
                 foreach ($day_arr as $event) {
-                    $startDate = $event->getProperty("dtstart");
-                    $endDate = $event->getProperty("dtend");
-                    $summary = $event->getProperty("summary");
-
-                    $begin = new DateTime($startDate['year']  . '-' . $startDate['month'] . '-' . $startDate['day']);
-                    $end   = new DateTime($endDate['year']  . '-' . $endDate['month'] . '-' . $endDate['day']);
+                    $startDate = $event->getDtstart();
+                    $begin = $event->getDtend();
+                    $end = $event->getSummary();
 
                     for ($i = $begin; $begin <= $end; $i->modify('+1 day')) {
                         $event_text = $i->format("Y/m/d") . ', ' . $summary;
@@ -164,13 +162,18 @@ $app->get('/calendar/csv/{name}', function (Request $request, Response $response
     }
 });
 
+/**
+ * Has become obsolete
+ * Check to use the direct links instead
+ */
 $app->get('/calendar/proxy/{name}', function (Request $request, Response $response) {
     $name = $request->getAttribute('name');
     $response->withHeader('Content-Type', 'text/calendar');
     $response->withHeader('Content-Disposition', 'attachment');
-    if ($name === 'vies.ics') {
+
+    if ($name === 'vies') {
         $response->getBody()->write(file_get_contents('https://vejle.viggo.dk/ExportCalendar/?ViggoId=87&UserId=1528&code=4d4e5cc9cc0a6e52360344f0508a22de8f420194'));
-    } else if ($name === 'vih.ics') {
+    } else if ($name === 'vih') {
         $response->getBody()->write(file_get_contents('https://vejle.viggo.dk/ExportCalendar/?ViggoId=87&UserId=298&code=17bca452d0b19b39a49d3ffdc1a77faabe5ae617'));
     } else {
         return $response->withStatus(404);

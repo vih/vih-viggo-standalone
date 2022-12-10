@@ -13,8 +13,14 @@ use Kigkonsult\Icalcreator\Vcalendar;
 
 date_default_timezone_set('Europe/Copenhagen');
 
+$configuration = [
+    'settings' => [
+        'displayErrorDetails' => true,
+    ],
+];
+
 // Prepare the Pimple dependency injection container.
-$container = new \Slim\Container();
+$container = new \Slim\Container($configuration);
 
 $container['config'] = [
     'organization' => 'Vejle Idrætshøjskole',
@@ -136,7 +142,8 @@ $app->get('/calendar/csv/{name}', function (Request $request, Response $response
                     for ($i = $begin; $begin <= $end; $i->modify('+1 day')) {
                         $event_text = $i->format("Y/m/d") . ', ' . $summary;
                         if (isset($vevents[$i->format("Ymd")])) {
-                            if ($last_summary != $summary) {
+                            #if ($last_summary != $summary) {
+                            if (!str_contains($last_summary, $summary)) {
                                 $vevents[$i->format("Ymd")] .= ' - ' . $summary;
                             }
                         } else {

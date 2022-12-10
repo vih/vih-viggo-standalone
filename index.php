@@ -123,14 +123,15 @@ $app->get('/calendar/csv/{name}', function (Request $request, Response $response
     $content = file_get_contents($url);
     $vcalendar->parse($content);
 
-    $events = $vcalendar->selectComponents(date('Y'), date('m'), date('d'), date('Y') + 1, date('m'), date('d'), 'vevent');
+    $events = $vcalendar->selectComponents(date('Y'), date('m'), date('d'), date('Y') + 1, date('m'), date('d'));
+
     foreach ($events as $year => $year_arr) {
         foreach ($year_arr as $month => $month_arr) {
             foreach ($month_arr as $day => $day_arr) {
                 foreach ($day_arr as $event) {
-                    $startDate = $event->getDtstart();
-                    $begin = $event->getDtend();
-                    $end = $event->getSummary();
+                    $begin = $event->getDtstart();
+                    $end = $event->getDtend();
+                    $summary = $event->getSummary();
 
                     for ($i = $begin; $begin <= $end; $i->modify('+1 day')) {
                         $event_text = $i->format("Y/m/d") . ', ' . $summary;

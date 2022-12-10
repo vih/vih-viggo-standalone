@@ -15,6 +15,7 @@
     ],
     "require": {
         "php": "~8",
+        "ext-openssl": "*",
         "slim/slim": "~3.5",
         "guzzlehttp/guzzle": "~6.0",
         "kigkonsult/icalcreator": "2.41.30",

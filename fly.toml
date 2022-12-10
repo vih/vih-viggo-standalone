@@ -8,6 +8,8 @@ processes = []
 [build]
   builder = "paketobuildpacks/builder:full"
   buildpacks = ["gcr.io/paketo-buildpacks/php"]
+  [build.args]
+    BP_COMPOSER_INSTALL_OPTIONS = "--ignore-platform-req=ext-zlib"
 
 [env]
 APP_URL = "https://vih-kalendersiden.fly.dev"

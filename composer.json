@@ -17,7 +17,7 @@
         "php": "~8",
         "slim/slim": "~3.5",
         "guzzlehttp/guzzle": "~6.0",
-        "kigkonsult/icalcreator": "2.41.71",
+        "kigkonsult/icalcreator": "2.41.30",
         "twig/twig": "~1.33"
     },
     "autoload": {

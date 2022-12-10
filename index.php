@@ -9,6 +9,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use GuzzleHttp\Client;
 use Kalendersiden\ViggoAdapter;
+use Kigkonsult\Icalcreator\Vcalendar;
 
 date_default_timezone_set('Europe/Copenhagen');
 
@@ -17,7 +18,9 @@ $container = new \Slim\Container();
 
 $container['config'] = [
     'organization' => 'Vejle Idrætshøjskole',
-    'calendar' => 'https://vejle.viggo.dk/ExportCalendar/?ViggoId=87&UserId=298&code=17bca452d0b19b39a49d3ffdc1a77faabe5ae617'
+    'calendar' => 'https://vejle.viggo.dk/ExportCalendar/?ViggoId=87&UserId=298&code=17bca452d0b19b39a49d3ffdc1a77faabe5ae617',
+    #'host' => 'http://localhost:8080'
+    'host' => 'https://vih-kalendersiden.fly.dev'
 ];
 
 // Add a Twig service to the container.
@@ -39,18 +42,24 @@ $app->get('/', function(Slim\Http\Request $request, Slim\Http\Response $response
 $app->get('/calendar/{name}', function (Slim\Http\Request $request, Slim\Http\Response $response) {
     $name = $request->getAttribute('name');
     if ($name === 'vies') {
-        $config = array("unique_id" => "vies.dk",
-                        "URL"       => "https://vih-calendar.herokuapp.com/calendar/proxy/vies.ics" );
+        $config   = [
+            Vcalendar::UNIQUE_ID => "vies.dk",
+        ];
+        $url = $this->get('config')['host'] . "/calendar/proxy/vies.ics";
         $headline = 'Vejle Idrætsefterskole';
     } else if ($name === 'vih') {
-        $config = array("unique_id" => "vih.dk",
-                        "URL"       => "https://vih-calendar.herokuapp.com/calendar/proxy/vih.ics" );
+        $config   = [
+            Vcalendar::UNIQUE_ID => "vih.dk",
+        ];
+        $url = $this->get('config')['host'] . "/calendar/proxy/vih.ics";
         $headline = 'Vejle Idrætshøjskole';
     } else {
         return $response->withStatus(404);
     }
 
-    $vcalendar = new vcalendar($config);
+    $vcalendar = new Vcalendar($config);
+    $content = file_get_contents($url);
+    $vcalendar->parse($content);
     $adapter = new ViggoAdapter($vcalendar);
     $event_data = $adapter->parse();
 
@@ -94,19 +103,25 @@ $app->get('/calendar/{name}', function (Slim\Http\Request $request, Slim\Http\Re
 $app->get('/calendar/csv/{name}', function (Request $request, Response $response) {
     $name = $request->getAttribute('name');
     if ($name === 'vies') {
-        $config = array("unique_id" => "vies.dk",
-                        "URL"       => "https://vih-calendar.herokuapp.com/calendar/proxy/vies.ics" );
+        $config   = [
+            Vcalendar::UNIQUE_ID => "vies.dk",
+        ];
+        $url = $this->get('config')['host'] . "/calendar/proxy/vies.ics";
         $headline = 'Vejle Idrætsefterskole';
     } else if ($name === 'vih') {
-        $config = array("unique_id" => "vih.dk",
-                        "URL"       => "https://vih-calendar.herokuapp.com/calendar/proxy/vih.ics" );
+        $config   = [
+            Vcalendar::UNIQUE_ID => "vih.dk",
+        ];
+        $url = $this->get('config')['host'] . "/calendar/proxy/vih.ics";
         $headline = 'Vejle Idrætshøjskole';
     } else {
         return $response->withStatus(404);
     }
 
-    $vcalendar = new vcalendar($config);
-    $vcalendar->parse();
+    $vcalendar = new Vcalendar($config);
+    $content = file_get_contents($url);
+    $vcalendar->parse($content);
+
     $events = $vcalendar->selectComponents(date('Y'), date('m'), date('d'), date('Y') + 1, date('m'), date('d'), 'vevent');
     foreach ($events as $year => $year_arr) {
         foreach ($year_arr as $month => $month_arr) {

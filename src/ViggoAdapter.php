@@ -6,14 +6,13 @@ class ViggoAdapter
 {
     public $vcalendar;
 
-    public function __construct(\vcalendar $vcalendar)
+    public function __construct(Vcalendar $vcalendar)
     {
         $this->vcalendar = $vcalendar;
     }
 
     public function parse()
     {
-        $this->vcalendar->parse();
         $events = $this->vcalendar->selectComponents(date('Y'), date('m'), date('d'), date('Y') + 1, date('m'), date('d'), 'vevent');
         foreach ($events as $year => $year_arr) {
             foreach ($year_arr as $month => $month_arr) {

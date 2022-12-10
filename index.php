@@ -64,6 +64,7 @@ $app->get('/calendar/{name}', function (Slim\Http\Request $request, Slim\Http\Re
     }
 
     $content = file_get_contents($url);
+
     $vcalendar = new Vcalendar($config);
 
     $vcalendar->parse($content);
@@ -125,8 +126,14 @@ $app->get('/calendar/csv/{name}', function (Request $request, Response $response
         return $response->withStatus(404);
     }
 
-    $vcalendar = new Vcalendar($config);
     $content = file_get_contents($url);
+
+    // $client = new GuzzleHttp\Client();
+    // $response = $client->request('GET', $url);
+    // $body = $response->getBody();
+    // $content = $body->getContents();
+
+    $vcalendar = new Vcalendar($config);
     $vcalendar->parse($content);
 
     $events = $vcalendar->selectComponents(date('Y'), date('m'), date('d'), date('Y') + 1, date('m'), date('d'));
@@ -143,8 +150,13 @@ $app->get('/calendar/csv/{name}', function (Request $request, Response $response
                         $event_text = $i->format("Y/m/d") . ', ' . $summary;
                         if (isset($vevents[$i->format("Ymd")])) {
                             #if ($last_summary != $summary) {
+                            /*
+                            if ($i->format('d') == 27 && str_contains($last_summary, 'La Santa')) {
+                                return $i->format('d') . ' | ' . $last_summary . ' | ' .$summary;
+                            }
+                            */
                             if (!str_contains($last_summary, $summary)) {
-                                $vevents[$i->format("Ymd")] .= ' - ' . $summary;
+                                $vevents[$i->format("Ymd")] = ' - ' . $summary;
                             }
                         } else {
                             $vevents[$i->format("Ymd")] = $event_text;

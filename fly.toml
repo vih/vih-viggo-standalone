@@ -3,6 +3,7 @@
 app = "vih-kalendersiden"
 kill_signal = "SIGINT"
 kill_timeout = 5
+mounts = []
 processes = []
 
 [build]

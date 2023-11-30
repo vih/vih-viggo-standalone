@@ -13,8 +13,8 @@ processes = []
     BP_COMPOSER_INSTALL_OPTIONS = "--ignore-platform-req=ext-zlib"
 
 [env]
-APP_URL = "https://vih-kalendersiden.fly.dev"
-PORT = 8080
+  APP_URL = "https://vih-kalendersiden.fly.dev"
+  PORT = 8080
 
 [experimental]
   allowed_public_ports = []

@@ -149,26 +149,22 @@ $app->get('/calendar/csv/{name}', function (Request $request, Response $response
                     for ($i = $begin; $begin <= $end; $i->modify('+1 day')) {
                         $event_text = $i->format("Y/m/d") . ', ' . $summary;
                         if (isset($vevents[$i->format("Ymd")])) {
-                            #if ($last_summary != $summary) {
-                            /*
-                            if ($i->format('d') == 27 && str_contains($last_summary, 'La Santa')) {
-                                return $i->format('d') . ' | ' . $last_summary . ' | ' .$summary;
-                            }
-                            */
-                            if (!str_contains($last_summary, $summary)) {
-                                $vevents[$i->format("Ymd")] = ' - ' . $summary;
+                            
+                            if (!str_contains($vevents[$i->format("Ymd")], $summary)) {
+                                $vevents[$i->format("Ymd")] = $vevents[$i->format("Ymd")] . ' - ' . $summary;
                             }
                         } else {
                             $vevents[$i->format("Ymd")] = $event_text;
                         }
                     }
                     $last_date = $i;
-                    $last_summary = $summary;
                 }
             }
         }
     }
     $output = implode("\n", $vevents);
+
+    return $output;
 
     try {
         $response = $response->withHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0');

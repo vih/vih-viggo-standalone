@@ -164,8 +164,6 @@ $app->get('/calendar/csv/{name}', function (Request $request, Response $response
     }
     $output = implode("\n", $vevents);
 
-    return $output;
-
     try {
         $response = $response->withHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0');
         $response = $response->withHeader('Content-Type', 'application/excel');

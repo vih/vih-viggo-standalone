@@ -7,7 +7,7 @@ mounts = []
 processes = []
 
 [build]
-  builder = "paketobuildpacks/builder-jammy-base"
+  builder = "paketobuildpacks/builder-jammy-full"
   buildpacks = ["paketo-buildpacks/php"]
   [build.args]
     BP_COMPOSER_INSTALL_OPTIONS = "--ignore-platform-req=ext-zlib --ignore-platform-req=ext-simplexml"

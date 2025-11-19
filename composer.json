@@ -16,6 +16,9 @@
     "require": {
         "php": "~8",
         "ext-openssl": "*",
+        "ext-simplexml": "*",
+        "ext-dom": "*",
+        "ext-libxml": "*",
         "slim/slim": "~3.5",
         "guzzlehttp/guzzle": "^7.0",
         "kigkonsult/icalcreator": "2.41.30",
@@ -23,5 +26,13 @@
     },
     "autoload": {
         "psr-4": {"Kalendersiden\\": "src/"}
+    },
+    "config": {
+        "audit": {
+            "ignore": [
+                "PKSA-yhcn-xrg3-68b1",
+                "PKSA-2wrf-1xmk-1pky"
+            ]
+        }
     }
 }

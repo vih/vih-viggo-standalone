@@ -10,7 +10,8 @@ processes = []
   builder = "paketobuildpacks/builder-jammy-base"
   buildpacks = ["paketo-buildpacks/php"]
   [build.args]
-    BP_COMPOSER_INSTALL_OPTIONS = "--ignore-platform-req=ext-zlib"
+    # Enable the SimpleXML extension inside Paketo PHP
+    BP_PHP_ENABLE_EXTENSIONS = "simplexml dom"
 
 [env]
   APP_URL = "https://vih-kalendersiden.fly.dev"

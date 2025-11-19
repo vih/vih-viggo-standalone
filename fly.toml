@@ -13,6 +13,7 @@ processes = []
     BP_COMPOSER_INSTALL_OPTIONS = "--ignore-platform-req=ext-zlib --ignore-platform-req=ext-simplexml"
     # Enable the SimpleXML extension inside Paketo PHP
     BP_PHP_ENABLE_EXTENSIONS = "xml simplexml dom"
+    BP_PHP_VERSION = "8.3.*"
 
 [env]
   APP_URL = "https://vih-kalendersiden.fly.dev"

@@ -7,8 +7,8 @@ mounts = []
 processes = []
 
 [build]
-  builder = "paketobuildpacks/builder:full"
-  buildpacks = ["gcr.io/paketo-buildpacks/php"]
+  builder = "paketobuildpacks/builder-jammy-base"
+  buildpacks = ["paketo-buildpacks/php"]
   [build.args]
     BP_COMPOSER_INSTALL_OPTIONS = "--ignore-platform-req=ext-zlib"
 

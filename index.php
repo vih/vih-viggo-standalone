@@ -71,11 +71,11 @@ $app->get('/calendar/{name}', function (Slim\Http\Request $request, Slim\Http\Re
     $adapter = new ViggoAdapter($vcalendar);
     $event_data = $adapter->parse();
 
-    $start_month = (int)$request->getQueryParam('start_month');
-    $year = (int)$request->getQueryParam('year');
-    $months= (int)$request->getQueryParam('months');
-    $pages = (int)$request->getQueryParam('pages');
-    $format = 'landscape';
+    $start_month = (int)$request->getQueryParam('start_month', date('n'));
+    $year = (int)$request->getQueryParam('year', date('Y'));
+    $months= (int)$request->getQueryParam('months', 1);
+    $pages = (int)$request->getQueryParam('pages', 1);
+    $format = $request->getQueryParam('format', 'landscape');
 
     $url = 'https://kalendersiden.dk/generate.php';
 

@@ -26,8 +26,16 @@
 
 <div class="lead jumbotron" style="text-align: center;">
     <h1><span class="fa fa-calendar" aria-hidden="true"></span> Get PDF calendar</h1>
-    <p>Get the official calendar for {{ organization }} as a PDF provided by <a href="http://kalendersiden.dk">kalendersiden.dk</a>.</p>
+    <p>Get the official calendar for {{ organization }} as a PDF provided by <a href="https://kalendersiden.dk/">kalendersiden.dk</a>.</p>
 </div>
+
+<div>
+    <p>
+    <strong>Download directly</strong>: <a href="/calendar/vih?start_month=8&year=2025&months=5&pages=1">Autumn 2025</a> | <a href="/calendar/vih?start_month=1&year=2026&months=6&pages=1">Spring 2026</a> | <a href="/calendar/vih?start_month=8&year=2026&months=5&pages=1">Autumn 2026</a> | <a href="/calendar/vih?start_month=1&year=2027&months=6&pages=1">Spring 2027</a>
+    </p>
+</div>
+
+<h2>Create your own calendar</h2>
 
 <form action="/calendar/vih" method="GET">
     <div class="form-group">
@@ -43,7 +51,7 @@
     <div class="form-group">
         <label for="year">Start year</label>
         <select id="year" name="year" class="form-control" aria-describedby="year-help">
-            {% for j in range(2023, 2030) %}
+            {% for j in range(2025, 2032) %}
             <option value="{{ j }}">{{ j }}</option>
             {% endfor %}
         </select>
